@@ -1,10 +1,10 @@
-# Blood-Donation
-Blood donation portal for an organization
+
+# Blood donation portal for an organization
 Blood Donation Management System - Documentation
-Overview
+# Overview
 This Django-based web application is designed to manage blood donation activities for organizations, hospitals, and donors. The system provides role-based access control with different functionalities for administrators, superusers, privileged users, and regular users.
 
-Features
+# Features
 User Roles and Access Control
 Admin: Manages organizations and superusers
 
@@ -14,7 +14,7 @@ Privileged User (PU): Manages hospitals, donors, and donations
 
 User: Registers donors and manages donations
 
-Core Functionalities
+# Core Functionalities
 Organization Management
 
 Add/delete organizations
@@ -71,8 +71,8 @@ Year-to-date donation counts
 
 Comparison with previous month
 
-Technical Details
-Models
+# Technical Details
+ ## Models
 organizationMaster: Stores organization information
 
 userMaster: Stores user details and roles
