@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> User-Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        body {
+            padding-top: 120px; /* Adjusted to accommodate both header and navbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .site-header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1030;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        /* Added explicit styling for header-row to ensure proper layout */
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .navbar {
+            top: 60px; /* Position navbar below the header */
+            background-color: red !important;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .site-title {
+            /* Added to ensure the title maintains its style */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .header-main-content {
+            /* Added to group logo and title */
+            display: flex;
+            align-items: center;
+            min-width: 0; /* Important for text-overflow to work */
+        }
+        
+        .offcanvas-body {
+            background-color: white !important;
+            color: black !important;
+        }
+        
+        .offcanvas-body .nav-link {
+            color: black !important;
+        }
+        
+        .offcanvas-body .dropdown-menu {
+            background-color: white !important;
+            color: black !important;
+        }
+        
+        .offcanvas-body .dropdown-item {
+            color: black !important;
+        }
+        
+        .offcanvas {
+            width: 270px !important;
+        }
+        
+        .offcanvas-body .nav-link:hover {
+            background-color: #f0f0f0; /* Light gray background on hover */
+            color: #dc3545 !important; /* Darker red text color on hover */
+        }
+        
+        .offcanvas-body .dropdown-item:hover {
+            background-color: #f0f0f0; /* Light gray background on hover */
+            color: #dc3545 !important; /* Darker red text color on hover */
+        }
+        
+        .offcanvas-header {
+            background-color: red !important;
+        }
+        
+        .offcanvas-header .btn-close {
+            filter: invert(1); /* Makes the close button white */
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+            border-radius: 50%; /* Circular shape */
+            padding: 0.5rem; /* Increase padding for better click area */
+        }
+        
+        .user-info {
+            margin-left: auto; /* Push user info to the right */
+            text-align: right;
+            display: block !important; /* Ensure user info is visible */
+        }
+        
+        .user-info div {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .user-info a {
+            color: #007bff; /* Link color */
+            text-decoration: none;
+        }
+        
+        .user-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .statistics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-item-label {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: red;
+        }
+        
+        .stat-value {
+            border: 2px solid red;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #333333;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 15px 0;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer p {
+            margin: 0;
+            color: #6c757d;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 550px) {
+            .site-header .header-row {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            .header-main-content {
+                flex: 0 0 auto;
+                margin-right: 10px;
+            }
+            
+            .user-info {
+                flex: 1 1 100%;
+                margin: 8px 0 0 0;
+                text-align: left;
+                font-size: 12px;
+                display: block !important; /* Ensure it's visible on mobile */
+                order: 3; /* Make sure it appears below header content on small screens */
+            }
+            
+            .user-info div {
+                display: inline-block;
+                margin-right: 10px;
+                font-size: 12px;
+            }
+            
+            .navbar {
+                top: 85px; /* Adjusted to accommodate potentially larger header on mobile */
+            }
+            
+            .statistics {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-value {
+                width: 120px;
+                height: 120px;
+                font-size: 28px;
+            }
+            
+            .stat-item-label {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            /* Adjust body padding for mobile */
+            body {
+                padding-top: 145px; /* Increased to accommodate larger header on mobile */
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .site-title h1 {
+                font-size: 1rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo -->
+    <header class="site-header">
+        <div class="container-fluid">
+            <div class="header-row">
+                <div class="header-main-content">
+                    <img src="https://storage.googleapis.com/a1aa/image/4JEeyOlRe2vfwoMPFJZxYX3hVQBx1YuhHb49DXnfS4z9JbuOB.jpg" alt="Logo" class="logo-img">
+                    <div class="site-title ms-3">
+                        <h1 class="fs-4 mb-0">Blood Donation Center</h1>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <button><a href="/lgout_USER/">Logout</a></button>
+                </div>
+                <!-- <div class="user-info">
+                    <div>Welcome! <a href="#">John Doe</a></div>
+                    <div>Last Logged in 31/01/2024 11:12 AM</div>
+                </div> -->
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-dark fixed-top">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <span class="navbar-text text-white" style="font-size:larger;">Dashboard</span>
+            </div>
+            <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/USER_home/">Home</a>
+                        </li>
+                        
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#"> 🔍 Donor Search</a>
+                        </li> -->
+                        
+                        
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Donor Management
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/USER_donor_registration/">Donor Registration</a></li>
+                                <li><a class="dropdown-item" href="/USER_donor_search/">Donor Search</a></li>
+                                <li><a class="dropdown-item" href="/USER_view_donors/">View Donors</a></li>
+                              </ul>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Reports
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/USER_donor_report/">Detailed Blood <br>Donation Report</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-content">
+        <h2>Overall Blood Donation Details</h2>
+        <div class="statistics">
+            <div class="stat-item">
+                <div class="stat-item-label">This Month</div>
+                <div class="stat-value">{{thismonth}}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-item-label">Last Month</div>
+                <div class="stat-value">{{lastmonth}}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-item-label">This Year</div>
+                <div class="stat-value">{{thisyear}}</div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>Copyrights Reserved @2024</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
